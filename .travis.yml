@@ -8,3 +8,8 @@ install:
 
 script: nosetests
 after_failure: cat ./nlgserv/tests/nlgserv.stdout.log ./nlgserv/tests/nlgserv.stderr.log
+
+branches:
+  only:
+    - master
+    - testing
