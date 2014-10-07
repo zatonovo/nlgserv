@@ -7,3 +7,4 @@ install:
   - pip install .
 
 script: nosetests
+after_failure: cat ./nlgserv/tests/nlgserv.stdout.log ./nlgserv/tests/nlgserv.stderr.log
