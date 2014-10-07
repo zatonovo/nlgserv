@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name="NLGServ",
+    name="nlgserv",
     version="0.0.0",
     author="Darren Richardson",
     packages=["nlgserv","nlgserv.tests"],
