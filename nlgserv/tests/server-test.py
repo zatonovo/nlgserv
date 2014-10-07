@@ -40,10 +40,10 @@ class TestTense(unittest.TestCase):
 if __name__=="__main__":
     print __file__
     print "Starting up nlgserv..."
-    nlgserv = subprocess.Popen([os.path.join(os.path.dirname(__file__),"./jython.jar"), "./server.py"],
+    nlgserv = subprocess.Popen([os.path.join(os.path.dirname(__file__),"../jython.jar"), os.path.join(os.path.dirname(__file__), "../server.py")],
                                stdin=subprocess.PIPE,
-                               stdout=open(os.path.devnull, "w"),
-                               stderr=open(os.path.devnull, "w"),
+                               stdout=open(os.path.join(os.path.dirname(__file__), "nlgserv.stdout.log"), "w+"),
+                               stderr=open(os.path.join(os.path.dirname(__file__), "nlgserv.stderr.log"), "w+"),
                                preexec_fn=os.setsid)
     sleep(20) # It needs longer now it's loading from the standalone package...
     print "Commencing testing..."

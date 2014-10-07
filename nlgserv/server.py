@@ -1,6 +1,6 @@
 # First we add simple nlg to the path
-import sys
-sys.path.append("./simplenlg.jar")
+import sys, os
+sys.path.append(os.path.join(os.path.dirname(__file__), "simplenlg.jar"))
 
 # Bottle will handle the HTTP side of things
 from bottle import route, run, request, response
