@@ -1,5 +1,3 @@
-#!/usr/bin/jython
-
 # First we add simple nlg to the path
 import sys
 sys.path.append("./simplenlg.jar")

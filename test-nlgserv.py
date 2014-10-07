@@ -15,11 +15,11 @@ def send_test_data(json_data):
 
 class TestCake(unittest.TestCase):
     def test(self):
-        self.assertEqual(send_test_data(open("fixtures/cake.json","r").read()), "John baked a cake from some ingredients.")
+        self.assertEqual(send_test_data(open(os.path.join(os.path.dirname(__file__), "fixtures/cake.json"),"r").read()), "John baked a cake from some ingredients.")
         
 class TestIngredients(unittest.TestCase):
     def test(self):
-        self.assertEqual(send_test_data(open("fixtures/ingredients.json","r").read()), "The ingredients were flour, sugar, butter and eggs.")
+        self.assertEqual(send_test_data(open(os.path.join(os.path.dirname(__file__), "fixtures/ingredients.json"),"r").read()), "The ingredients were flour, sugar, butter and eggs.")
 
 class TestTense(unittest.TestCase):
     def test(self):
@@ -38,8 +38,9 @@ class TestTense(unittest.TestCase):
         self.assertEqual(send_test_data(json.dumps({"sentence":sentence})), "John will kick Dave.")
 
 if __name__=="__main__":
+    print __file__
     print "Starting up nlgserv..."
-    nlgserv = subprocess.Popen(["./nlgserv.py"],
+    nlgserv = subprocess.Popen([os.path.join(os.path.dirname(__file__),"./jython.jar"), "./nlgserv.py"],
                                stdin=subprocess.PIPE,
                                stdout=open(os.path.devnull, "w"),
                                stderr=open(os.path.devnull, "w"),
