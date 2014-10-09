@@ -6,7 +6,7 @@ setup(
     author="Darren Richardson",
     packages=["nlgserv","nlgserv.tests"],
     package_data={"nlgserv":["simplenlg.jar","jython.jar"]},
-    scripts=[],
+    scripts=["bin/nlgserv"],
     license="LICENSE.txt",
     description="JSON HTTP wrapper for SimpleNLG",
     long_description=open("README.md").read()
