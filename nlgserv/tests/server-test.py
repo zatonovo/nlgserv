@@ -11,9 +11,8 @@ nlgserv = None
 
 def setUpModule():
     global nlgserv
-    print __file__
     print "Starting up nlgserv..."
-    nlgserv = subprocess.Popen([os.path.join(os.path.dirname(__file__),"../jython.jar"), os.path.join(os.path.dirname(__file__), "../server.py")],
+    nlgserv = subprocess.Popen([os.path.join(os.path.dirname(__file__),"../jython.jar"), os.path.join(os.path.dirname(__file__), "../_server.py"), "localhost", "8080"],
                                stdin=subprocess.PIPE,
                                stdout=open(os.path.join(os.path.dirname(__file__), "nlgserv.stdout.log"), "w+"),
                                stderr=open(os.path.join(os.path.dirname(__file__), "nlgserv.stderr.log"), "w+"),
