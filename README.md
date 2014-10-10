@@ -10,3 +10,4 @@ Build status
 ------------
 
 [![Build Status](https://travis-ci.org/mnestis/nlgserv.svg?branch=master)](https://travis-ci.org/mnestis/nlgserv)
+[![Latest Version](https://pypip.in/version/nlgserv/badge.png)](https://pypi.python.org/pypi/nlgserv/)
