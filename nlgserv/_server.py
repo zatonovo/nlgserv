@@ -115,26 +115,25 @@ def process_modifiers(parent, mods):
         parent.addModifier(expand_element(mod))
 
 def process_features(element, f_spec):
-    for f in f_spec:
-        for feature, value in f.items():
-            if feature=="tense":
-                if value=="past":
-                    element.setFeature(Feature.TENSE, Tense.PAST)
-                elif value=="present":
-                    element.setFeature(Feature.TENSE, Tense.PRESENT)
-                elif value=="future":
-                    element.setFeature(Feature.TENSE, Tense.FUTURE)
-                else:
-                    raise Exception("Unrecognised tense: %s" % (value,))
-            elif feature=="number":
-                if value=="singular":
-                    element.setFeature(Feature.NUMBER, NumberAgreement.SINGULAR)
-                elif value=="plural":
-                    element.setFeature(Feature.NUMBER, NumberAgreement.PLURAL)
-                else:
-                    raise Exception("Unrecognised number: %s" % (value,))
+    for feature, value in f_spec.items():
+        if feature=="tense":
+            if value=="past":
+                element.setFeature(Feature.TENSE, Tense.PAST)
+            elif value=="present":
+                element.setFeature(Feature.TENSE, Tense.PRESENT)
+            elif value=="future":
+                element.setFeature(Feature.TENSE, Tense.FUTURE)
             else:
-                raise Exception("Unrecognised feature: %s" % (feature,))
+                raise Exception("Unrecognised tense: %s" % (value,))
+        elif feature=="number":
+            if value=="singular":
+                element.setFeature(Feature.NUMBER, NumberAgreement.SINGULAR)
+            elif value=="plural":
+                element.setFeature(Feature.NUMBER, NumberAgreement.PLURAL)
+            else:
+                raise Exception("Unrecognised number: %s" % (value,))
+        else:
+            raise Exception("Unrecognised feature: %s" % (feature,))
 
 if __name__=="__main__":
     host = sys.argv[1]
