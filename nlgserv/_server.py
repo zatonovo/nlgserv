@@ -46,7 +46,7 @@ def generate_sentence(json_request):
         sentence.setIndirectObject(expand_element(s_spec["indirect_object"]))
 
     if "verb" in s_spec:
-        sentence.setVerb(s_spec["verb"])
+        sentence.setVerb(expand_element(s_spec["verb"]))
 
     if "complements" in s_spec:
         process_complements(sentence, s_spec["complements"])
@@ -77,6 +77,12 @@ def expand_element(elem):
                 process_modifiers(element, elem["modifiers"])
             if "complements" in elem:
                 process_complements(element, elem["complements"])
+            return element
+        elif elem["type"] == "verb_phrase":
+            element = nlgFactory.createVerbPhrase()
+            element.setVerb(elem["head"])
+            if "features" in elem:
+                process_features(element, elem["features"])
             return element
         elif elem["type"] == "preposition_phrase":
             prepPhrase = nlgFactory.createPrepositionPhrase()
