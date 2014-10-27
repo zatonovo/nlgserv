@@ -48,11 +48,11 @@ class TestTense(unittest.TestCase):
         sentence["verb"] = "kick"
         sentence["object"] = "Dave"
 
-        sentence["features"] = [{"tense":"past"}]
+        sentence["features"] = {"tense":"past"}
         self.assertEqual(send_data(json.dumps({"sentence":sentence})), "John kicked Dave.")
 
-        sentence["features"] = [{"tense":"present"}]
+        sentence["features"] = {"tense":"present"}
         self.assertEqual(send_data(json.dumps({"sentence":sentence})), "John kicks Dave.")
         
-        sentence["features"] = [{"tense":"future"}]
+        sentence["features"] = {"tense":"future"}
         self.assertEqual(send_data(json.dumps({"sentence":sentence})), "John will kick Dave.")

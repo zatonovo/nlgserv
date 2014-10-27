@@ -11,11 +11,8 @@
 	     "type": "noun_phrase",
 	     "head": "ingredients",
 	     "determiner": "a",
-	     "features":[
-		 {"number": "plural"}
-	     ]},
+	     "features":{"number": "plural"}
+	 },
 	 "preposition": "from"}
     ],
-    "features": [
-	{"tense": "past"}
-    ]}}
+    "features":{"tense": "past"}}}

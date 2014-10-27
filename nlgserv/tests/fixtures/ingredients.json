@@ -3,7 +3,7 @@
 	"type": "noun_phrase",
 	"head": "ingredients",
 	"determiner": "the",
-	"features": [{"number":"plural"}]
+	"features":{"number":"plural"}
 	},
     "verb": "is",
     "object": {
@@ -15,9 +15,9 @@
 	    "butter",
 	    {"type":"noun_phrase",
 	     "head": "egg",
-	     "features":[{"number":"plural"}]}	    
+	     "features":{"number":"plural"}}	    
 	]
     },
-    "features": [{"tense":"past"}]
+    "features":{"tense":"past"}
     }
 }
