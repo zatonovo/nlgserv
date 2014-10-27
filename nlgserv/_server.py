@@ -132,6 +132,23 @@ def process_features(element, f_spec):
                 element.setFeature(Feature.NUMBER, NumberAgreement.PLURAL)
             else:
                 raise Exception("Unrecognised number: %s" % (value,))
+        elif feature=="passive":
+            print "We've recevied a passive feature."
+            if value=="true":
+                print "Setting Feature.PASSIVE to True"
+                element.setFeature(Feature.PASSIVE, True)
+            elif value=="false":
+                print "Setting Feature.PASSIVE to False"
+                element.setFeature(Feature.PASSIVE, False)
+            else:
+                raise Exception("Feature.PASSIVE must either be 'true' or 'false'.")
+        elif feature=="perfect":
+            if value=="true":
+                element.setFeature(Feature.PERFECT, True)
+            elif value=="false":
+                element.setFeature(Feature.PERFECT, False)
+            else:
+                raise Exception("Feature.PERFECT must either be 'true' or 'false'.")
         else:
             raise Exception("Unrecognised feature: %s" % (feature,))
 
