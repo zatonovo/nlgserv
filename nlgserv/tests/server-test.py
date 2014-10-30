@@ -56,3 +56,32 @@ class TestTense(unittest.TestCase):
         
         sentence["features"] = {"tense":"future"}
         self.assertEqual(send_data(json.dumps({"sentence":sentence})), "John will kick Dave.")
+
+class TestPassive(unittest.TestCase):
+    def test_present(self):
+        sentence = {}
+        sentence["subject"] = "John"
+        sentence["verb"] = "kick"
+        sentence["object"] = "Dave"
+
+        sentence["features"] = {"passive":"false"}
+        self.assertEqual(send_data(json.dumps({"sentence":sentence})), "John kicks Dave.")
+
+        sentence["features"] = {"passive":"true"}
+        self.assertEqual(send_data(json.dumps({"sentence":sentence})), "Dave is kicked by John.")
+
+class TestPerfect(unittest.TestCase):
+    def test_present(self):
+        sentence = {}
+        sentence["subject"] = "John"
+        sentence["verb"] = "kick"
+        sentence["object"] = "Dave"
+
+        sentence["features"] = {"perfect":"false"}
+        self.assertEqual(send_data(json.dumps({"sentence":sentence})), "John kicks Dave.")
+
+        sentence["features"] = {"perfect":"true"}
+        self.assertEqual(send_data(json.dumps({"sentence":sentence})), "John has kicked Dave.")
+
+        sentence["features"]["tense"] = "past"
+        self.assertEqual(send_data(json.dumps({"sentence":sentence})), "John had kicked Dave.")
