@@ -12,6 +12,8 @@ from simplenlg.realiser.english import Realiser
 from simplenlg.features import Feature, Tense, NumberAgreement
 from simplenlg.phrasespec import NPPhraseSpec
 
+from java.lang import Boolean
+
 # We only need one instance of these, so we'll create them globally.
 lexicon = Lexicon.getDefaultLexicon()
 nlgFactory = NLGFactory(lexicon)
@@ -136,17 +138,17 @@ def process_features(element, f_spec):
             print "We've recevied a passive feature."
             if value=="true":
                 print "Setting Feature.PASSIVE to True"
-                element.setFeature(Feature.PASSIVE, True)
+                element.setFeature(Feature.PASSIVE, Boolean(True))
             elif value=="false":
                 print "Setting Feature.PASSIVE to False"
-                element.setFeature(Feature.PASSIVE, False)
+                element.setFeature(Feature.PASSIVE, Boolean(False))
             else:
                 raise Exception("Feature.PASSIVE must either be 'true' or 'false'.")
         elif feature=="perfect":
             if value=="true":
-                element.setFeature(Feature.PERFECT, True)
+                element.setFeature(Feature.PERFECT, Boolean(True))
             elif value=="false":
-                element.setFeature(Feature.PERFECT, False)
+                element.setFeature(Feature.PERFECT, Boolean(False))
             else:
                 raise Exception("Feature.PERFECT must either be 'true' or 'false'.")
         else:
