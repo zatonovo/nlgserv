@@ -135,12 +135,9 @@ def process_features(element, f_spec):
             else:
                 raise Exception("Unrecognised number: %s" % (value,))
         elif feature=="passive":
-            print "We've recevied a passive feature."
             if value=="true":
-                print "Setting Feature.PASSIVE to True"
                 element.setFeature(Feature.PASSIVE, Boolean(True))
             elif value=="false":
-                print "Setting Feature.PASSIVE to False"
                 element.setFeature(Feature.PASSIVE, Boolean(False))
             else:
                 raise Exception("Feature.PASSIVE must either be 'true' or 'false'.")
