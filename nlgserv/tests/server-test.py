@@ -106,9 +106,9 @@ class TestComplementClauses(unittest.TestCase):
         sentence_a["object"] = "John"
 
         sentence_b = {}
-        sentence_b["subject"] = "John"
+        sentence_b["subject"] = "he"
         sentence_b["verb"] = "buy"
-        sentence_b["indirect_object"] = "Mary"
+        sentence_b["indirect_object"] = "she"
         sentence_b["object"] = {"type": "noun_phrase",
                                 "head": "flower",
                                 "features": {"number": "plural"}}
@@ -116,9 +116,9 @@ class TestComplementClauses(unittest.TestCase):
                                   "complementiser":"because"}
 
         self.assertEqual(send_data(json.dumps({"sentence":sentence_a})), "Mary loves John.")
-        self.assertEqual(send_data(json.dumps({"sentence":sentence_b})), "John bought Mary flowers.")
+        self.assertEqual(send_data(json.dumps({"sentence":sentence_b})), "He bought her flowers.")
 
         sentence_a["complements"] = [{"type": "clause",
                                       "spec": sentence_b}]
 
-        self.assertEqual(send_data(json.dumps({"sentence":sentence_a})), "Mary loves John because John bought Mary flowers.")
+        self.assertEqual(send_data(json.dumps({"sentence":sentence_a})), "Mary loves John because he bought her flowers.")
