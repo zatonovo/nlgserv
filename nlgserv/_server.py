@@ -24,7 +24,7 @@ realiser = Realiser(lexicon)
 def process_generate_sentence_request():
     try:
         # Generate the sentence from the JSON payload.
-        return generate_sentence(request.json)
+        return realiser.realiseSentence(generate_sentence(request.json))
     except Exception, e:
         response.status = 400
         # If any exceptions are thrown, set status to 400, and return the error string
@@ -59,7 +59,7 @@ def generate_sentence(json_request):
     if "features" in s_spec:
         process_features(sentence, s_spec["features"])
 
-    return realiser.realiseSentence(sentence) # We need to realise as a sentence to get punctuation
+    return sentence # We need to realise as a sentence to get punctuation
 
 def expand_element(elem):
     if type(elem)==unicode:
@@ -68,6 +68,9 @@ def expand_element(elem):
     else:
         if "type" not in elem:
             raise Exception("Elements must have a type.")
+        elif elem["type"] == "clause":
+            # This needs to be tidied up, as it's very hacky.
+            return generate_sentence({"sentence":elem["spec"]})
         elif elem["type"] == "noun_phrase":
             element = nlgFactory.createNounPhrase()
             element.setNoun(elem["head"])
@@ -85,6 +88,8 @@ def expand_element(elem):
             element.setVerb(elem["head"])
             if "features" in elem:
                 process_features(element, elem["features"])
+            if "modifiers" in elem:
+                process_modifiers(element, elem["modifiers"])
             return element
         elif elem["type"] == "preposition_phrase":
             prepPhrase = nlgFactory.createPrepositionPhrase()
@@ -148,6 +153,10 @@ def process_features(element, f_spec):
                 element.setFeature(Feature.PERFECT, Boolean(False))
             else:
                 raise Exception("Feature.PERFECT must either be 'true' or 'false'.")
+        elif feature=="cue_phrase":
+            element.setFeature(Feature.CUE_PHRASE, value)
+        elif feature=="complementiser":
+            element.setFeature(Feature.COMPLEMENTISER, value)
         else:
             raise Exception("Unrecognised feature: %s" % (feature,))
 
