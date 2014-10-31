@@ -85,3 +85,40 @@ class TestPerfect(unittest.TestCase):
 
         sentence["features"]["tense"] = "past"
         self.assertEqual(send_data(json.dumps({"sentence":sentence})), "John had kicked Dave.")
+
+class TestCuePhrase(unittest.TestCase):
+    def test_however(self):
+        sentence = {}
+        sentence["subject"] = "John"
+        sentence["verb"] = "kick"
+        sentence["object"] = "Dave"
+
+        self.assertEqual(send_data(json.dumps({"sentence":sentence})), "John kicks Dave.")
+        
+        sentence["features"] = {"cue_phrase":"however"}
+        self.assertEqual(send_data(json.dumps({"sentence":sentence})), "However John kicks Dave.")
+
+class TestComplementClauses(unittest.TestCase):
+    def test_clauses(self):
+        sentence_a = {}
+        sentence_a["subject"] = "Mary"
+        sentence_a["verb"] = "love"
+        sentence_a["object"] = "John"
+
+        sentence_b = {}
+        sentence_b["subject"] = "John"
+        sentence_b["verb"] = "buy"
+        sentence_b["indirect_object"] = "Mary"
+        sentence_b["object"] = {"type": "noun_phrase",
+                                "head": "flower",
+                                "features": {"number": "plural"}}
+        sentence_b["features"] = {"tense":"past",
+                                  "complementiser":"because"}
+
+        self.assertEqual(send_data(json.dumps({"sentence":sentence_a})), "Mary loves John.")
+        self.assertEqual(send_data(json.dumps({"sentence":sentence_b})), "John bought Mary flowers.")
+
+        sentence_a["complements"] = [{"type": "clause",
+                                      "spec": sentence_b}]
+
+        self.assertEqual(send_data(json.dumps({"sentence":sentence_a})), "Mary loves John because John bought Mary flowers.")
