@@ -1,3 +1,6 @@
+v0.2.3, 2014-12-05 -- Removed jexec from server controller
+	This was causing compatability issues with some systems.
+
 v0.2.2, 2014-12-05 -- Added clauses
 	This should allow for the generation of more expressive sentences.
 
