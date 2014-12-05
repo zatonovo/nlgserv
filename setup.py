@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="nlgserv",
-    version="0.2.1",
+    version="0.2.2",
     author="Darren Richardson",
     packages=["nlgserv","nlgserv.tests"],
     package_data={"nlgserv":["simplenlg.jar","jython.jar"]},
