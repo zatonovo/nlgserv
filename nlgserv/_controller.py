@@ -15,8 +15,7 @@ def start_server(host, port, output=None, error=None):
         error = open(os.devnull, "w")
 
     print "Starting nlgserv on %s:%s" % (host, port)
-    server_instance = Popen(["jexec",
-                             os.path.join(os.path.dirname(__file__),"jython.jar"),
+    server_instance = Popen([os.path.join(os.path.dirname(__file__),"jython.jar"),
                              os.path.join(os.path.dirname(__file__),"_server.py"),
                              host,
                              str(port)],
