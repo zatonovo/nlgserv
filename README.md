@@ -1,4 +1,4 @@
-nlgserv is a simple server that accepts JSON representations of sentences and generated English sentences from those.
+nlgserv is a simple server that accepts JSON representations of sentences and generates English sentences from those.
 
 It uses SimpleNLG (under the [MPL 2.0 licence](https://www.mozilla.org/MPL/)) available [on code.google.com](https://code.google.com/p/simplenlg/) for natural language generation.
 
