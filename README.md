@@ -1,6 +1,6 @@
 nlgserv is a simple server that accepts JSON representations of sentences and generates English sentences from those.
 
-It uses SimpleNLG (under the [MPL 2.0 licence](https://www.mozilla.org/MPL/)) available [on code.google.com](https://code.google.com/p/simplenlg/) for natural language generation.
+It uses SimpleNLG (under the [MPL 2.0 licence](https://www.mozilla.org/MPL/)) available [on github.com](https://github.com/simplenlg/simplenlg) for natural language generation.
 
 In order to use SimpleNLG (which is implemented in Java), [Jython 2.7beta3](http://www.jython.org) is also bundled, under the terms of the [PSF v.2](http://www.jython.org/license.html).
 
