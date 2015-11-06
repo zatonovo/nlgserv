@@ -26,6 +26,7 @@ def process_generate_sentence_request():
         # Generate the sentence from the JSON payload.
         return realiser.realiseSentence(generate_sentence(request.json))
     except Exception, e:
+        print e
         response.status = 400
         # If any exceptions are thrown, set status to 400, and return the error string
         return str(e)
@@ -80,6 +81,10 @@ def expand_element(elem):
                 process_features(element, elem["features"])
             if "modifiers" in elem:
                 process_modifiers(element, elem["modifiers"])
+            if "pre-modifiers" in elem:
+                process_premodifiers(element, elem["pre-modifiers"])
+            if "post-modifiers" in elem:
+                process_postmodifiers(element, elem["post-modifiers"])
             if "complements" in elem:
                 process_complements(element, elem["complements"])
             return element
@@ -90,6 +95,10 @@ def expand_element(elem):
                 process_features(element, elem["features"])
             if "modifiers" in elem:
                 process_modifiers(element, elem["modifiers"])
+            if "post-modifiers" in elem:
+                process_postmodifiers(element, elem["post-modifiers"])
+            if "pre-modifiers" in elem:
+                process_premodifiers(element, elem["pre-modifiers"])
             return element
         elif elem["type"] == "preposition_phrase":
             prepPhrase = nlgFactory.createPrepositionPhrase()
@@ -120,6 +129,14 @@ def process_complements(parent, comps):
 def process_modifiers(parent, mods):
     for mod in mods:
         parent.addModifier(expand_element(mod))
+
+def process_premodifiers(parent, premods):
+    for mod in premods:
+        parent.addPreModifier(expand_element(mod))
+
+def process_postmodifiers(parent, postmods):
+    for mod in postmods:
+        parent.addPostModifier(expand_element(mod))
 
 def process_features(element, f_spec):
     for feature, value in f_spec.items():
