@@ -11,18 +11,18 @@ nlgserv = None
 
 def setUpModule():
     global nlgserv
-    print "Starting up nlgserv..."
+    print("Starting up nlgserv...")
     nlgserv = subprocess.Popen([os.path.join(os.path.dirname(__file__),"../jython.jar"), os.path.join(os.path.dirname(__file__), "../_server.py"), "localhost", "8080"],
                                stdin=subprocess.PIPE,
                                stdout=open(os.path.join(os.path.dirname(__file__), "nlgserv.stdout.log"), "w+"),
                                stderr=open(os.path.join(os.path.dirname(__file__), "nlgserv.stderr.log"), "w+"),
                                preexec_fn=os.setsid)
     sleep(60) # It needs longer now it's loading from the standalone package...
-    print "Commencing testing..."
+    print("Commencing testing...")
     
 def tearDownModule():
     global nlgserv
-    print "Shutting down nlgserv..."
+    print("Shutting down nlgserv...")
     os.killpg(nlgserv.pid, subprocess.signal.SIGTERM)
     nlgserv.wait()
     

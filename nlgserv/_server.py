@@ -25,8 +25,8 @@ def process_generate_sentence_request():
     try:
         # Generate the sentence from the JSON payload.
         return realiser.realiseSentence(generate_sentence(request.json))
-    except Exception, e:
-        print e
+    except Exception as e:
+        print(e)
         response.status = 400
         # If any exceptions are thrown, set status to 400, and return the error string
         return str(e)
@@ -180,5 +180,5 @@ def process_features(element, f_spec):
 if __name__=="__main__":
     host = sys.argv[1]
     port = int(sys.argv[2])
-    print "Starting to run on %s, port %s" % (host, port)
+    print("Starting to run on %s, port %s" % (host, port))
     run(host=host, port=port)
