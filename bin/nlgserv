@@ -29,7 +29,7 @@ if __name__=="__main__":
       server = nlgserv.start_server(host, port)
 
    try:
-      print "Server started. Press Ctrl+C to stop."
+      print("Server started. Press Ctrl+C to stop.")
       server.wait()
    except KeyboardInterrupt:
       nlgserv.stop_server(server)

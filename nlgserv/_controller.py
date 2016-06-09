@@ -14,8 +14,9 @@ def start_server(host, port, output=None, error=None):
     if error == None:
         error = open(os.devnull, "w")
 
-    print "Starting nlgserv on %s:%s" % (host, port)
-    server_instance = Popen([os.path.join(os.path.dirname(__file__),"jython.jar"),
+    print("Starting nlgserv on %s:%s" % (host, port))
+    server_instance = Popen(["java", "-jar",
+                             os.path.join(os.path.dirname(__file__),"jython.jar"),
                              os.path.join(os.path.dirname(__file__),"_server.py"),
                              host,
                              str(port)],
@@ -33,6 +34,6 @@ def stop_server(server_instance):
     This function is blocking, and will wait until the PG is dead before releasing
     control.
     """
-    print "Shutting down nlgserv..."
+    print("Shutting down nlgserv...")
     os.killpg(server_instance.pid, SIGTERM)
     server_instance.wait()
