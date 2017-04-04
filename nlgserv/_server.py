@@ -19,20 +19,29 @@ lexicon = Lexicon.getDefaultLexicon()
 nlgFactory = NLGFactory(lexicon)
 realiser = Realiser(lexicon)
 
+@route('/lexicon', method='GET')
+def do_reload():
+  print("Lexicon is %s" % lexicon)
+
+
 # Process the request to http://host:port/generateSentence
-@route('/generateSentence', method="POST")
+@route('/generate', method="POST")
 def process_generate_sentence_request():
-    try:
-        # Generate the sentence from the JSON payload.
-        return realiser.realiseSentence(generate_sentence(request.json))
-    except Exception as e:
-        print(e)
-        response.status = 400
-        # If any exceptions are thrown, set status to 400, and return the error string
-        return str(e)
+  print("Process request")
+  try:
+    # Generate the sentence from the JSON payload.
+    sent = generate_sentence(request.json)
+    print("Sentence scion is %s" % sent)
+    return realiser.realiseSentence(sent)
+  except Exception as e:
+    print(e)
+    response.status = 400
+    # If any exceptions are thrown, return the error string
+    return str(e)
 
 def generate_sentence(json_request):
-    sentence = nlgFactory.createClause() # All sentences have at least one clause.
+    # All sentences have at least one clause.
+    sentence = nlgFactory.createClause()
 
     if "sentence" not in json_request:
         raise Exception("Request must contain a 'sentence' object.")
