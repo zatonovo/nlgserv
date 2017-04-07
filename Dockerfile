@@ -7,11 +7,9 @@
 FROM zatonovo/pez_ai:latest
 MAINTAINER Brian Lee Yung Rowe "rowe@zatonovo.com"
 
-# RUN pip install pytest nltk
-# RUN python -m nltk.downloader punkt words stopwords maxent_ne_chunker \
-#  averaged_perceptron_tagger maxent_treebank_pos_tagger
+#RUN pip3 install urllib2
 
-ENV PYTHONPATH='/app'
+ENV PYTHONPATH='/app:/pez_ai'
 ADD . /app
 WORKDIR /app
 

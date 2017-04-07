@@ -6,7 +6,12 @@ PYTHON?=python3
 PROJECT = nlgd
 PORT = 8099
 HOST_DIR = $(shell pwd)
-DOCKEROPTS = -v ${HOST_DIR}:/app -p $(PORT):$(PORT)
+
+SPACY_PATH = "import spacy, os.path; print(os.path.join(os.path.dirname(spacy.__file__), 'data'))"
+SPACY_DATA = $(shell docker run -it --rm zatonovo/pez_ai ${PYTHON} -c ${SPACY_PATH})
+CORPORAOPTS = -v /opt/nltk_data:/usr/share/nltk_data -v /opt/spacy_data:${SPACY_DATA}
+DOCKEROPTS = -v ${HOST_DIR}:/app ${CORPORAOPTS}
+SERVEROPTS = -p $(PORT):$(PORT)
 
 # There's not really anything to build.
 all: 
@@ -14,7 +19,7 @@ all:
 
 # make CONF=tm.cfg run
 run:
-	docker run -it --rm $(DOCKEROPTS) zatonovo/$(PROJECT) ./bin/nlgserv 0.0.0.0 $(PORT) server.log server.err
+	docker run -it --rm $(DOCKEROPTS) $(SERVEROPTS) zatonovo/$(PROJECT) ./bin/nlgserv 0.0.0.0 $(PORT) server.log server.err
 
 
 bash:

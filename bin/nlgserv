@@ -1,4 +1,21 @@
 #!/usr/bin/env python3
+# Phrase types: https://github.com/simplenlg/simplenlg/wiki/Section-III-%E2%80%93-Getting-started
+# Features; https://github.com/zatonovo/nlgserv/blob/master/nlgserv/_server.py
+
+# json='{"sentence":{"subject":"John","verb":"kick","object":"Dave","features":{"tense":"past"}}}'
+# json='{"sentence":{"subject":"John","verb":"kick","object":"Dave","features":{"tense":"present"}}}'
+# json='{"sentence":{"subject":"John","verb":"kick","object":"Dave","features":{"tense":"future"}}}'
+
+# json='{"sentence":{"subject":"the boy","verb":"gave","object":"the dog","indirect_object":"a present","features":{"tense":"present","perfect":"true"}}}'
+
+# Doesn't work so well
+# json='{"sentence":{"subject":"your location","verb":"is","object":"what","features":{"tense":"present","passive":"true"}}}'
+
+# json='{"sentence":{"subject":"PAL 233","verb":"arrive","object":"what terminal","features":{"tense":"present","perfect":"true"}}}'
+
+
+# curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d "$json" http://localhost:8099/generate
+
 
 import nlgserv
 from sys import argv
